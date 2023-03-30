@@ -1,0 +1,6 @@
+helpers/castconfig.py
+*.pyc
+*.csv
+__pycache__
+castai-agent/*
+.DS_store
