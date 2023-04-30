@@ -10,12 +10,14 @@ module "castai-aks-cluster" {
   node_resource_group = azurerm_kubernetes_cluster.this.node_resource_group ### Provide via cluster TF state
   resource_group      = azurerm_kubernetes_cluster.this.resource_group_name ### Provide via cluster TF state
 
-  delete_nodes_on_disconnect = var.delete_nodes_on_disconnect
+  delete_nodes_on_disconnect = var.castai_configuration.delete_nodes_on_disconnect
 
   subscription_id = data.azurerm_subscription.current.subscription_id
   tenant_id       = data.azurerm_subscription.current.tenant_id
 
   default_node_configuration = module.castai-aks-cluster.castai_node_configurations["default"]
+
+  autoscaler_policies_json   = jsonencode(var.castai_configuration.autoscaler_policies_json)
 
   node_configurations = {
     default = {
